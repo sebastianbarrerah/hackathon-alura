@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { PaginationProps } from "../lib/types";
 
 function Pagination({ items, itemsPerPage, renderItems }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,14 +44,22 @@ function Pagination({ items, itemsPerPage, renderItems }) {
   const selectedItems = items.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div>
-      <div>{renderItems(selectedItems)}</div>
+    <div className="display-flex">
+      {renderItems(selectedItems)}
       <div>
-        <button className="paginationButton2" onClick={handlePrevPage} disabled={currentPage === 1}>
+        <button
+          className="paginationButton2"
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
           <ChevronLeft></ChevronLeft>
         </button>
         {renderPageNumbers()}
-        <button className="paginationButton2" onClick={handleNextPage} disabled={currentPage === totalPages}>
+        <button
+          className="paginationButton2"
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+        >
           <ChevronRight></ChevronRight>
         </button>
       </div>
@@ -59,10 +67,6 @@ function Pagination({ items, itemsPerPage, renderItems }) {
   );
 }
 
-Pagination.propTypes = {
-  items: PropTypes.array.isRequired,
-  itemsPerPage: PropTypes.number.isRequired,
-  renderItems: PropTypes.func.isRequired,
-};
+Pagination.propTypes = PaginationProps;
 
 export default Pagination;

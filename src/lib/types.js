@@ -8,3 +8,9 @@ export const Nota = PropTypes.shape({
 });
 
 export const Notas = PropTypes.arrayOf(Nota).isRequired;
+
+export const PaginationProps = {
+  items: PropTypes.array.isRequired,
+  itemsPerPage: PropTypes.number.isRequired,
+  renderItems: PropTypes.func.isRequired,
+};

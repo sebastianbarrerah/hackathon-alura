@@ -45,6 +45,8 @@
 
 body {
   font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .titule {
@@ -63,7 +65,10 @@ body {
   background-color: #333;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar a {
@@ -101,6 +106,13 @@ body {
   border-radius: 5px;
 }
 
+.display-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .openbtn:hover {
   background-color: #444;
 }
@@ -108,6 +120,7 @@ body {
 .sidebarCard {
   padding: 2em;
   margin: 2em;
+  width: 200px;
   background-color: #444;
   color: white;
   border-radius: 10px;
@@ -173,4 +186,123 @@ hr {
 
 .paginationButton2:hover {
   background-color: #555;
+}
+
+/* NavBar */
+
+.navbar {
+  display: flex;
+  height: 5rem;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-bottom: 2px solid rgb(223, 251, 219);
+  background-color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.navBarLogo {
+  margin-left: 1rem;
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.navBarLogo h2 {
+  display: inline-block;
+  margin-right: 1rem;
+  font-size: 2rem;
+  color: white;
+}
+
+.navBarLogo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.navBarLogo:hover {
+  filter: drop-shadow(0 0 2em #f7f7f7aa);
+}
+
+.hamburger-menu-right {
+  display: flex;
+  justify-content: end;
+}
+
+.hamburger-menu {
+  padding: 0 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.hamburger-menu .line {
+  width: 24px;
+  height: 2px;
+  margin-bottom: 4px;
+  background-color: white; /* Color de las líneas similar al sidebar */
+  transition: all 0.3s ease; /* Transición para las líneas */
+}
+
+.nav-menu {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0;
+  background-color: #333; /* Color de fondo similar al sidebar */
+  font-weight: 600;
+  text-align: center;
+  transform: translateY(-200%); /* Oculta el menú al estar cerrado */
+  transition: transform 0.3s ease; /* Transición para la animación de deslizamiento */
+  z-index: 1000; /* Asegura que el menú esté por encima de otros contenidos */
+}
+
+.nav-menu.open {
+  transform: translateY(1%); /* Muestra el menú al estar abierto */
+}
+
+.nav-menu a {
+  display: block;
+  padding: 1rem 0;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border-radius: 20px;
+}
+
+.nav-menu a:hover {
+  background-color: #555;
+  color: #f1f1f1;
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+  .navbar {
+    justify-content: space-around;
+    background-color: transparent;
+    border-bottom: none;
+  }
+
+  .nav-menu {
+    position: static;
+    width: auto;
+    top: auto;
+    background: none;
+    display: block;
+    transform: translateY(0);
+  }
+
+  .nav-menu a {
+    display: inline-block;
+    padding: 1rem;
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
 }
