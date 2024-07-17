@@ -1,13 +1,70 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas bla bla</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button class="menu-btn">☰</button>
+            <h1>Notas bla bla</h1>
+        </div>
+        <div class="header-right">
+            <button class="user-btn">👤</button>
+        </div>
+    </header>
+    <main>
+        <div class="toolbar">
+            <button class="new-note-btn">+Nueva</button>
+            <div class="filter-section">
+                <label for="filter">Filtrar por:</label>
+                <select id="filter" name="filter">
+                    <option value="title">Título</option>
+                </select>
+                <input type="date" id="date-filter" name="date-filter">
+                <button class="add-filter-btn">+</button>
+            </div>
+        </div>
+        <div class="notes">
+            <div class="note">
+                <h2>Titulo</h2>
+                <p>Fecha/hora</p>
+                <p>Nota: hola esta es una nota de ejemplo😁</p>
+            </div>
+            <div class="note">
+                <h2>Titulo</h2>
+                <p>Fecha/hora</p>
+                <p>Nota: hola esta es una nota de ejemplo😁</p>
+            </div>
+            <div class="note">
+                <h2>Titulo</h2>
+                <p>Fecha/hora</p>
+                <p>Nota: hola esta es una nota de ejemplo😁</p>
+            </div>
+            <div class="note">
+                <h2>Titulo</h2>
+                <p>Fecha/hora</p>
+                <p>Nota: hola esta es una nota de ejemplo😁</p>
+            </div>
+            <div class="note">
+                <h2>Titulo</h2>
+                <p>Fecha/hora</p>
+                <p>Nota: hola esta es una nota de ejemplo😁</p>
+            </div>
+            <div class="note">
+                <h2>Titulo</h2>
+                <p>Fecha/hora</p>
+                <p>Sistema</p>
+                <p>Nota: hola esta es una nota de ejemplo😁</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <button class="edit-btn">Editar</button>
+        <button class="delete-btn">Eliminar</button>
+    </footer>
+</body>
 </html>
