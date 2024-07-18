@@ -1,33 +1,71 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import { Nota } from "../../lib/types";
+import useNotesStore from "../../lib/useNotesStore";
+import Modal from "./modal";
+import Pagination from "../pagination";
 
-const NotesContainer = ({ notes }) => {
-  const [selectedNoteIndex, setSelectedNoteIndex] = useState(null);
+const NotesContainer = () => {
+  const {
+    notes,
+    selectedNoteId,
+    isModalVisible,
+    currentNote,
+    setSelectedNoteId,
+    setIsModalVisible,
+    setCurrentNote,
+    addNote,
+    editNote,
+    deleteNote,
+  } = useNotesStore();
 
   const handleNewNote = () => {
-    // Lógica para añadir una nueva nota
+    setCurrentNote(null);
+    setIsModalVisible(true);
   };
 
   const handleEditNote = () => {
-    if (selectedNoteIndex !== null) {
-      // Lógica para editar la nota seleccionada
-      const noteToEdit = notes[selectedNoteIndex];
-      console.log("Editando nota:", noteToEdit);
+    if (selectedNoteId !== null) {
+      const noteToEdit = notes.find((note) => note.id === selectedNoteId);
+      setCurrentNote(noteToEdit);
+      setIsModalVisible(true);
     }
   };
 
   const handleDeleteNote = () => {
-    if (selectedNoteIndex !== null) {
-      // Lógica para eliminar la nota seleccionada
-      const noteToDelete = notes[selectedNoteIndex];
-      console.log("Eliminando nota:", noteToDelete);
+    if (selectedNoteId !== null) {
+      deleteNote(selectedNoteId);
+      setSelectedNoteId(null);
     }
   };
 
-  const handleSelectNote = (index) => {
-    setSelectedNoteIndex(index);
+  const handleSelectNote = (id) => {
+    setSelectedNoteId(id);
   };
+
+  const handleSaveNote = async (note) => {
+    if (currentNote) {
+      await editNote({ ...currentNote, ...note });
+    } else {
+      await addNote(note);
+    }
+    setIsModalVisible(false);
+  };
+
+  const renderNotes = (notes) => (
+    <div className="notes-grid">
+      {notes.map((note) => (
+        <div
+          key={note.id}
+          className={`note-card ${
+            note.id === selectedNoteId ? "selected" : ""
+          }`}
+          onClick={() => handleSelectNote(note.id)}
+        >
+          <h3>{note.title}</h3>
+          <p>{new Date().toISOString().split("T")[0]}</p>
+          <p>{note.title}</p>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div className="notes-container">
@@ -40,27 +78,15 @@ const NotesContainer = ({ notes }) => {
         <button onClick={handleEditNote}>Editar</button>
         <button onClick={handleDeleteNote}>Eliminar</button>
       </div>
-      <div className="notes-grid">
-        {notes.map((note, index) => (
-          <div
-            key={index}
-            className={`note-card ${
-              index === selectedNoteIndex ? "selected" : ""
-            }`}
-            onClick={() => handleSelectNote(index)}
-          >
-            <h3>{note.title}</h3>
-            <p>{note.date}</p>
-            <p>{note.description}</p>
-          </div>
-        ))}
-      </div>
+      <Pagination items={notes} itemsPerPage={18} renderItems={renderNotes} />
+      <Modal
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        note={currentNote}
+        onSave={handleSaveNote}
+      />
     </div>
   );
-};
-
-NotesContainer.propTypes = {
-  notes: PropTypes.arrayOf(Nota).isRequired,
 };
 
 export default NotesContainer;

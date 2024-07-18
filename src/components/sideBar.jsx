@@ -1,5 +1,5 @@
-import { Notas } from "../lib/types";
 import Pagination from "./pagination";
+import PropTypes from "prop-types";
 
 function SideBar({ notes }) {
   function openNav() {
@@ -24,10 +24,9 @@ function SideBar({ notes }) {
   );
 
   return (
-    <div>
-      <h1>SideBar</h1>
+    <div className="sidebarContainer">
       <button className="openbtn" onClick={openNav}>
-        ☰ Open Sidebar
+        ☰ Notas Completadas
       </button>
       <div id="mySidebar" className="sidebar">
         <button className="closebtn" onClick={closeNav}>
@@ -45,7 +44,16 @@ function SideBar({ notes }) {
 }
 
 SideBar.propTypes = {
-  notes: Notas,
+  notes: PropTypes.arrayOf(
+    PropTypes.shape({
+      userdId: PropTypes.number,
+      id: PropTypes.number,
+      title: PropTypes.string,
+      // description: PropTypes.string,
+      completed: PropTypes.bool,
+      // date: PropTypes.string,
+    })
+  ),
 };
 
 export default SideBar;

@@ -58,6 +58,7 @@
 .notes-container {
   width: 90%;
   padding: 20px;
+  background-color: #e7e7e756;
   border: 1px solid #444;
   border-radius: 20px;
 }
@@ -166,6 +167,14 @@ body {
   color: #f1f1f1;
 }
 
+.sidebarContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+
 .sidebar {
   height: 100%;
   width: 0;
@@ -229,24 +238,30 @@ body {
 }
 
 .sidebarCard {
-  padding: 2em;
-  margin: 2em;
+  padding: 1.5em;
+  margin: 1em;
   width: 200px;
   background-color: #444;
   color: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 300px;
 }
 
 .sidebarCard h3 {
-  margin: 0 0 1em;
+  margin: 0 0 10px;
+  display: -webkit-box;
+  line-clamp: 2; /* Número de líneas a mostrar */
+  -webkit-line-clamp: 2; /* Número de líneas a mostrar */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 40px; /* Altura máxima del contenedor */
 }
 
 hr {
   border: 0;
   border-top: 1px solid #818181;
-  margin: 1em 0;
+  margin: 10px 0;
 }
 
 @media screen and (max-width: 600px) {
@@ -259,13 +274,17 @@ hr {
     margin: 1em 0;
     font-weight: bold;
   }
+
+  .sidebarCard h3 {
+    font-size: small;
+  }
 }
 
 /* Pagination */
 
 .paginationButton {
   background-color: transparent;
-  color: white;
+  color: rgb(177, 177, 177);
   border: none;
   padding: 10px 15px;
   text-align: center;
@@ -283,7 +302,7 @@ hr {
 
 .paginationButton2 {
   background-color: transparent;
-  color: white;
+  color: rgb(177, 177, 177);
   border: none;
   padding: 10px 15px;
   text-align: center;
@@ -350,6 +369,7 @@ hr {
   cursor: pointer;
   display: flex;
   align-items: center;
+  color: #f1f1f1;
 }
 
 .hamburger-menu .line {
@@ -419,4 +439,149 @@ hr {
   .hamburger-menu {
     display: none;
   }
+}
+
+/* Modal */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.modal label {
+  display: block;
+  margin: 15px 0 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+.modal input,
+.modal textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.modal textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.modal button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal button:hover {
+  background-color: #555;
+}
+
+.modal button:active {
+  transform: scale(0.98);
+}
+
+.modal .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.modal .close-btn:hover {
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .modal {
+    width: 70%;
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 400px) {
+  .modal {
+    width: 80%;
+    max-width: 80%;
+  }
+
+  .modal h2 {
+    font-size: 1.25rem;
+  }
+
+  .modal input,
+  .modal textarea {
+    font-size: 0.9rem;
+  }
+
+  .modal button {
+    font-size: 0.9rem;
+  }
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin: 10px 0;
+}
+
+.checkbox-container {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.checkbox-container input {
+  accent-color: #333;
+  width: 20px;
+  height: 20px;
+}
+
+.checkbox-container input:checked {
+  background-color: #333;
+  border-color: #333;
+}
+
+.checkbox-container input:focus {
+  outline: none;
 }
