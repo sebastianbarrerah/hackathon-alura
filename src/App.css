@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,6 +39,116 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Home */
+.sectionHome {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.notes-container {
+  width: 90%;
+  padding: 20px;
+  border: 1px solid #444;
+  border-radius: 20px;
+}
+
+.notes-options {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px;
+  flex-wrap: wrap;
+  padding: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.notes-options button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: transparent;
+  border: none;
+  color: #444;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.notes-options label {
+  background-color: transparent;
+  color: #444;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.notes-options button:hover {
+  background-color: #44444433;
+}
+
+.notes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.note-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  width: calc(50% - 20px); /* Ajustar el tamaño para pantallas medianas */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.note-card:hover {
+  background-color: #f0f0f0;
+}
+
+.note-card.selected {
+  background-color: #e0e0e0;
+  border-color: #444;
+}
+
+@media screen and (max-width: 490px) {
+  .note-card {
+    width: calc(100% - 20px);
+  }
+
+  .notes-container {
+    width: 80%;
+  }
+}
+
+@media (min-width: 491px) and (max-width: 768px) {
+  .note-card {
+    width: calc(40% - 20px);
+  }
+}
+
+/* @media (min-width: 769px) and (max-width: 1200px) {
+  .note-card {
+    width: calc(50% - 20px);
+  }
+} */
+
+@media (min-width: 769px) {
+  .note-card {
+    width: calc(25% - 20px);
+  }
 }
 
 /* SideBar */
@@ -53,6 +163,7 @@ body {
   font-size: xx-large;
   margin: 1em 0;
   font-weight: bold;
+  color: #f1f1f1;
 }
 
 .sidebar {
@@ -190,6 +301,9 @@ hr {
 
 /* NavBar */
 
+.navbarContainer {
+  background-color: #333;
+}
 .navbar {
   display: flex;
   height: 5rem;

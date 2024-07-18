@@ -9,26 +9,31 @@ function NavBar() {
   };
 
   return (
-    <header>
-      <nav className="navbar">
-        <div className="navBarLogo">
-          <a href="/">
-            <h2>Notas</h2>
-          </a>
-        </div>
-        <div className="hamburger-menu" onClick={toggleMenu}>
-          <MenuIcon size="24px" />
-        </div>
-        <div className={`nav-menu ${menuOpen ? "open" : ""}`}>
-          <div className="hamburger-menu hamburger-menu-right" onClick={toggleMenu}>
-            <MenuIcon size="30px" />
+    <div className="navbarContainer">
+      <header>
+        <nav className="navbar">
+          <div className="navBarLogo">
+            <a href="/">
+              <h2>Notas</h2>
+            </a>
           </div>
-          <a href="#">Inicio</a>
-          <a href="#">Perfil</a>
-          <a href="#">Cerrar Sesion</a>
-        </div>
-      </nav>
-    </header>
+          <div className="hamburger-menu" onClick={toggleMenu}>
+            <MenuIcon size="24px" />
+          </div>
+          <div className={`nav-menu ${menuOpen ? "open" : ""}`}>
+            <div
+              className="hamburger-menu hamburger-menu-right"
+              onClick={toggleMenu}
+            >
+              <MenuIcon size="30px" />
+            </div>
+            <a href="#">Inicio</a>
+            <a href="#">Perfil</a>
+            <a href="#">Cerrar Sesion</a>
+          </div>
+        </nav>
+      </header>
+    </div>
   );
 }
 

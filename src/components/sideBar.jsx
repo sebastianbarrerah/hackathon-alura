@@ -24,7 +24,7 @@ function SideBar({ notes }) {
   );
 
   return (
-    <div className="side-bar">
+    <div>
       <h1>SideBar</h1>
       <button className="openbtn" onClick={openNav}>
         ☰ Open Sidebar
