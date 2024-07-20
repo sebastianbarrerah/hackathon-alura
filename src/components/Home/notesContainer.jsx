@@ -3,6 +3,9 @@ import Modal from "./modal";
 import Pagination from "../pagination";
 
 const NotesContainer = () => {
+
+  // const [titleValue, settitleValue] = useState('')
+
   const {
     notes,
     selectedNoteId,
@@ -14,6 +17,8 @@ const NotesContainer = () => {
     addNote,
     editNote,
     deleteNote,
+    // filterNotes,
+    // notesFilters
   } = useNotesStore();
 
   const handleNewNote = () => {
@@ -49,6 +54,11 @@ const NotesContainer = () => {
     setIsModalVisible(false);
   };
 
+  // const handleFilter = (e) => {
+  //   filterNotes(e.target.value)
+  // }
+
+
   const renderNotes = (notes) => (
     <div className="notes-grid">
       {notes.map((note) => (
@@ -72,8 +82,9 @@ const NotesContainer = () => {
       <div className="notes-options">
         <button onClick={handleNewNote}>+Nueva</button>
         <label>
+          {/* <input type="text" onChange={(e) => handleFilter(e)}/> */}
           Filtrar por:
-          <button>+</button>
+          <button >+</button>
         </label>
         <button onClick={handleEditNote}>Editar</button>
         <button onClick={handleDeleteNote}>Eliminar</button>
