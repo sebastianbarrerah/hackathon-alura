@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { MenuIcon } from "lucide-react";
+import Perfil from "./Perfil/Perfil";
 
 function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const [modal, setModal] = useState(false);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const handleModal = () => {
+    setModal(true);
+  }
+  
   return (
     <div className="navbarContainer">
+      <Perfil modal={modal} setModal={setModal}/>
       <header>
         <nav className="navbar">
           <div className="navBarLogo">
@@ -27,9 +33,9 @@ function NavBar() {
             >
               <MenuIcon size="30px" />
             </div>
-            <a href="#">Inicio</a>
-            <a href="#">Perfil</a>
-            <a href="#">Cerrar Sesion</a>
+            <a >Inicio</a>
+            <a onClick={handleModal} style={{cursor: "pointer"}}>Perfil</a>
+            <a>Cerrar Sesion</a>
           </div>
         </nav>
       </header>

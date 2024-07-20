@@ -1,0 +1,68 @@
+.modal-perfil {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content-perfil {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  
+  .mostrar {
+    display: flex;
+  }
+  
+  .ocultar {
+    display: none;
+  }
+  
+  .form-perfil {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .label-perfil{
+        font-size: 19px;
+    }
+    .input-perfil{
+        height: 40px;
+        border-radius: 7px;
+        border: 1px solid ;
+        padding: 0 5px;
+        font-size: 19px;
+        margin-bottom: 5px;
+    }
+    .cointainers-btn{
+        display: flex;
+        justify-content: space-around;
+        margin-top: 15px;
+        .btn-perfil{
+            cursor: pointer;
+            border: none;
+            width: 40%;
+            border-radius: 7px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid;
+            font-size: 20px;
+        }
+        .btn-perfil:hover{
+            background-color: rgb(44, 45, 45);
+            color: white;
+        }
+    }
+  }
+  
