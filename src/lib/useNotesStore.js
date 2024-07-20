@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useNotesStore = create((set) => ({
   notes: [],
-  notesFilters: [],
+  filteredNotes: [],
   selectedNoteId: null,
   isModalVisible: false,
   currentNote: null,
@@ -19,7 +19,7 @@ const useNotesStore = create((set) => ({
         title: todo.title,
         completed: todo.completed,
       }));
-      set({ notes: fetchedNotes });
+      set({ notes: fetchedNotes, filteredNotes: fetchedNotes });
     } catch (error) {
       console.error("Error fetching notes:", error);
     }
@@ -28,7 +28,6 @@ const useNotesStore = create((set) => ({
   setSelectedNoteId: (id) => set({ selectedNoteId: id }),
   setIsModalVisible: (isVisible) => set({ isModalVisible: isVisible }),
   setCurrentNote: (note) => set({ currentNote: note }),
-
   addNote: async (note) => {
     console.log("addNote");
 
@@ -45,7 +44,6 @@ const useNotesStore = create((set) => ({
       console.error("Error adding note:", error);
     }
   },
-
   editNote: async (note) => {
     console.log("editNote");
     try {
@@ -61,7 +59,6 @@ const useNotesStore = create((set) => ({
       console.error("Error editing note:", error);
     }
   },
-
   deleteNote: async (id) => {
     console.log("deleteNote");
     try {
@@ -73,20 +70,13 @@ const useNotesStore = create((set) => ({
       console.error("Error deleting note:", error);
     }
   },
-
-
-  filterNotes: async (titulo) => {
-    try {
-      set((state) => ({
-        notesFilters: state.notes.filter( item => item.title.ToLowerCase().include(titulo.ToLowerCase())) 
-      }));
-    } catch (error) {
-      console.error("Error deleting note:", error);
-    }
+  setSearchTerm: (term) => {
+    set((state) => ({
+      filteredNotes: state.notes.filter((note) =>
+        note.title.toLowerCase().includes(term.toLowerCase())
+      ),
+    }));
   },
 }));
-
-
-
 
 export default useNotesStore;

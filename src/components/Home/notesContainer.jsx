@@ -1,13 +1,12 @@
+import { useState, useEffect } from "react";
 import useNotesStore from "../../lib/useNotesStore";
 import Modal from "./modal";
 import Pagination from "../pagination";
 
 const NotesContainer = () => {
-
-  // const [titleValue, settitleValue] = useState('')
-
   const {
     notes,
+    filteredNotes,
     selectedNoteId,
     isModalVisible,
     currentNote,
@@ -17,9 +16,27 @@ const NotesContainer = () => {
     addNote,
     editNote,
     deleteNote,
-    // filterNotes,
-    // notesFilters
-  } = useNotesStore();
+    setSearchTerm,
+  } = useNotesStore((state) => ({
+    notes: state.notes,
+    filteredNotes: state.filteredNotes,
+    selectedNoteId: state.selectedNoteId,
+    isModalVisible: state.isModalVisible,
+    currentNote: state.currentNote,
+    setSelectedNoteId: state.setSelectedNoteId,
+    setIsModalVisible: state.setIsModalVisible,
+    setCurrentNote: state.setCurrentNote,
+    addNote: state.addNote,
+    editNote: state.editNote,
+    deleteNote: state.deleteNote,
+    setSearchTerm: state.setSearchTerm,
+  }));
+
+  const [searchTerm, setSearchTermState] = useState("");
+
+  useEffect(() => {
+    setSearchTerm(searchTerm);
+  }, [searchTerm, setSearchTerm]);
 
   const handleNewNote = () => {
     setCurrentNote(null);
@@ -54,14 +71,13 @@ const NotesContainer = () => {
     setIsModalVisible(false);
   };
 
-  // const handleFilter = (e) => {
-  //   filterNotes(e.target.value)
-  // }
+  const handleFilter = (e) => {
+    setSearchTermState(e.target.value);
+  };
 
-
-  const renderNotes = (notes) => (
+  const renderNotes = (filteredNotes) => (
     <div className="notes-grid">
-      {notes.map((note) => (
+      {filteredNotes.map((note) => (
         <div
           key={note.id}
           className={`note-card ${
@@ -82,14 +98,13 @@ const NotesContainer = () => {
       <div className="notes-options">
         <button onClick={handleNewNote}>+Nueva</button>
         <label>
-          {/* <input type="text" onChange={(e) => handleFilter(e)}/> */}
-          Filtrar por:
-          <button >+</button>
+          Filtrar por título:
+          <input type="text" value={searchTerm} onChange={handleFilter} />
         </label>
         <button onClick={handleEditNote}>Editar</button>
         <button onClick={handleDeleteNote}>Eliminar</button>
       </div>
-      <Pagination items={notes} itemsPerPage={18} renderItems={renderNotes} />
+      <Pagination items={filteredNotes} itemsPerPage={18} renderItems={renderNotes} />
       <Modal
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
