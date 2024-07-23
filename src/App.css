@@ -58,8 +58,8 @@
 .notes-container {
   width: 90%;
   padding: 20px;
-  background-color: #e7e7e756;
-  border: 1px solid #444;
+  background-color: #f4f4f9;
+  border: 1px solid #ccc;
   border-radius: 20px;
 }
 
@@ -70,7 +70,7 @@
   margin: 10px;
   flex-wrap: wrap;
   padding: 10px;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #ccc;
 }
 
 .notes-options button {
@@ -95,60 +95,62 @@
 
 .notes-options button:hover {
   background-color: #44444433;
+  color: #222;
+  transform: scale(1.05);
 }
 
 .notes-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .note-card {
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
-  width: calc(50% - 20px); /* Ajustar el tamaño para pantallas medianas */
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 10px 0;
+  max-height: 150px;
+  min-height: 150px;
+  margin: 10px;
   cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+  flex: 1 1 calc(25% - 20px);
 }
 
 .note-card:hover {
-  background-color: #f0f0f0;
+  background-color: #fafafa;
+  transform: scale(1.05);
 }
 
 .note-card.selected {
   background-color: #e0e0e0;
-  border-color: #444;
+  border-color: #888;
+}
+
+@media screen and (max-width: 1200px) {
+  .note-card {
+    flex: 1 1 calc(33.333% - 20px); /* Three columns on medium screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .note-card {
+    flex: 1 1 calc(50% - 20px); /* Two columns on smaller screens */
+    max-height: 180px;
+    min-height: 180px;
+  }
 }
 
 @media screen and (max-width: 490px) {
   .note-card {
-    width: calc(100% - 20px);
+    flex: 1 1 calc(100% - 20px); /* One column on very small screens */
+    max-height: 200px;
+    min-height: 200px;
   }
 
   .notes-container {
     width: 80%;
-  }
-}
-
-@media (min-width: 491px) and (max-width: 768px) {
-  .note-card {
-    width: calc(40% - 20px);
-  }
-}
-
-/* @media (min-width: 769px) and (max-width: 1200px) {
-  .note-card {
-    width: calc(50% - 20px);
-  }
-} */
-
-@media (min-width: 769px) {
-  .note-card {
-    width: calc(25% - 20px);
   }
 }
 

@@ -11,11 +11,11 @@ function NavBar() {
 
   const handleModal = () => {
     setModal(true);
-  }
-  
+  };
+
   return (
     <div className="navbarContainer">
-      <Perfil modal={modal} setModal={setModal}/>
+      <Perfil modal={modal} setModal={setModal} />
       <header>
         <nav className="navbar">
           <div className="navBarLogo">
@@ -33,8 +33,10 @@ function NavBar() {
             >
               <MenuIcon size="30px" />
             </div>
-            <a >Inicio</a>
-            <a onClick={handleModal} style={{cursor: "pointer"}}>Perfil</a>
+            <a>Inicio</a>
+            <a onClick={handleModal} style={{ cursor: "pointer" }}>
+              Perfil
+            </a>
             <a>Cerrar Sesion</a>
           </div>
         </nav>

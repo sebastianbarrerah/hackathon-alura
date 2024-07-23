@@ -7,6 +7,7 @@ const useNotesStore = create((set) => ({
   selectedNoteId: null,
   isModalVisible: false,
   currentNote: null,
+  searchTerm: "",
   fetchNotes: async () => {
     console.log("fetchNotes");
     try {
@@ -30,7 +31,6 @@ const useNotesStore = create((set) => ({
   setCurrentNote: (note) => set({ currentNote: note }),
   addNote: async (note) => {
     console.log("addNote");
-
     try {
       const response = await axios.post(
         "https://jsonplaceholder.typicode.com/todos",
@@ -39,7 +39,15 @@ const useNotesStore = create((set) => ({
           headers: { "Content-Type": "application/json" },
         }
       );
-      set((state) => ({ notes: [...state.notes, response.data] }));
+      set((state) => {
+        const updatedNotes = [...state.notes, response.data];
+        return {
+          notes: updatedNotes,
+          filteredNotes: updatedNotes.filter((n) =>
+            n.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+          ),
+        };
+      });
     } catch (error) {
       console.error("Error adding note:", error);
     }
@@ -52,9 +60,17 @@ const useNotesStore = create((set) => ({
         note,
         { headers: { "Content-Type": "application/json" } }
       );
-      set((state) => ({
-        notes: state.notes.map((n) => (n.id === note.id ? response.data : n)),
-      }));
+      set((state) => {
+        const updatedNotes = state.notes.map((n) =>
+          n.id === note.id ? response.data : n
+        );
+        return {
+          notes: updatedNotes,
+          filteredNotes: updatedNotes.filter((n) =>
+            n.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+          ),
+        };
+      });
     } catch (error) {
       console.error("Error editing note:", error);
     }
@@ -63,15 +79,22 @@ const useNotesStore = create((set) => ({
     console.log("deleteNote");
     try {
       await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
-      set((state) => ({
-        notes: state.notes.filter((note) => note.id !== id),
-      }));
+      set((state) => {
+        const updatedNotes = state.notes.filter((note) => note.id !== id);
+        return {
+          notes: updatedNotes,
+          filteredNotes: updatedNotes.filter((n) =>
+            n.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+          ),
+        };
+      });
     } catch (error) {
       console.error("Error deleting note:", error);
     }
   },
   setSearchTerm: (term) => {
     set((state) => ({
+      searchTerm: term,
       filteredNotes: state.notes.filter((note) =>
         note.title.toLowerCase().includes(term.toLowerCase())
       ),

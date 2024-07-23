@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import useNotesStore from "../../lib/useNotesStore";
 import Modal from "./modal";
 import Pagination from "../pagination";
+import Swal from "sweetalert2";
 
 const NotesContainer = () => {
   const {
@@ -51,10 +52,15 @@ const NotesContainer = () => {
     }
   };
 
-  const handleDeleteNote = () => {
+  const handleDeleteNote = async () => {
     if (selectedNoteId !== null) {
-      deleteNote(selectedNoteId);
+      await deleteNote(selectedNoteId);
       setSelectedNoteId(null);
+      Swal.fire({
+        icon: "success",
+        title: "Nota eliminada",
+        text: "La nota se ha eliminado exitosamente.",
+      });
     }
   };
 
@@ -65,8 +71,18 @@ const NotesContainer = () => {
   const handleSaveNote = async (note) => {
     if (currentNote) {
       await editNote({ ...currentNote, ...note });
+      Swal.fire({
+        icon: "success",
+        title: "Nota editada",
+        text: "La nota se ha editado exitosamente.",
+      });
     } else {
       await addNote(note);
+      Swal.fire({
+        icon: "success",
+        title: "Nota creada",
+        text: "La nota se ha creado exitosamente.",
+      });
     }
     setIsModalVisible(false);
   };
@@ -104,7 +120,11 @@ const NotesContainer = () => {
         <button onClick={handleEditNote}>Editar</button>
         <button onClick={handleDeleteNote}>Eliminar</button>
       </div>
-      <Pagination items={filteredNotes} itemsPerPage={18} renderItems={renderNotes} />
+      <Pagination
+        items={filteredNotes}
+        itemsPerPage={18}
+        renderItems={renderNotes}
+      />
       <Modal
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
